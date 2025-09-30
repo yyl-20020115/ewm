@@ -29,7 +29,9 @@
 #include <mach/clock.h>
 #include <Availability.h>
 #endif
-
+#ifndef CLOCK_REALTIME
+#define CLOCK_REALTIME 0
+#endif
 bool ewm_utl_endswith(char *s, char *suffix);
 
 #if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < 101200

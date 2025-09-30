@@ -24,7 +24,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <sys/stat.h>
 
 #include "mem.h"
@@ -489,7 +491,7 @@ int ewm_dsk_set_disk_data(struct ewm_dsk_t *dsk, uint8_t index, bool readonly, v
       for (int t = 0; t < EWM_DSK_TRACKS; t++) {
          drive->tracks[t].length = 6656;
          drive->tracks[t].data = malloc(6656);
-         memcpy(drive->tracks[t].data, data + (t * 6656), 6656);
+         memcpy(drive->tracks[t].data, (char*)data + (t * 6656), 6656);
       }
 
       uint8_t volume = dsk_locate_volume_number(&drive->tracks[0]);

@@ -1,9 +1,15 @@
 
 #include <stdio.h>
+#ifndef _WIN32
 #include <unistd.h>
+#else
+#define sleep(n) Sleep((n)*1000)
+#endif
 
 #include "one.h"
 #include "tty.h"
+
+
 
 void test(struct ewm_tty_t *tty) {
    // TODO Setup
@@ -33,7 +39,9 @@ void test(struct ewm_tty_t *tty) {
 
    printf("%-20s %.3f/refresh\n", "tty", per_screen);
 }
-
+#ifdef main
+#undef main
+#endif
 int main() {
    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) < 0) {
       fprintf(stderr, "Failed to initialize SDL: %s\n", SDL_GetError());

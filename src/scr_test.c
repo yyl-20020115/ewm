@@ -21,7 +21,11 @@
 // SOFTWARE.
 
 #include <stdlib.h>
+#ifndef _WIN32
 #include <unistd.h>
+#else
+#define sleep(n) Sleep((n)*1000)
+#endif
 
 #include "cpu.h"
 #include "mem.h"
@@ -101,7 +105,9 @@ void test(struct scr_t *scr, char *name, test_setup_t test_setup, test_run_t tes
 
    printf("%-20s %.3f/refresh\n", name, per_screen);
 }
-
+#ifdef main
+#undef main
+#endif
 int main() {
    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS) < 0) {
       fprintf(stderr, "Failed to initialize SDL: %s\n", SDL_GetError());

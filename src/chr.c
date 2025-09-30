@@ -26,7 +26,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32
 #include <unistd.h>
+#endif
 #include <sys/stat.h>
 
 #include <SDL2/SDL.h>
@@ -35,7 +37,7 @@
 #include "chr.h"
 
 static int _load_rom_data(char *rom_path, uint8_t rom_data[2048]) {
-   int fd = open(rom_path, O_RDONLY);
+   int fd = open(rom_path, O_RDONLY| _O_BINARY);
    if (fd == -1) {
       return -1;
    }
@@ -50,8 +52,8 @@ static int _load_rom_data(char *rom_path, uint8_t rom_data[2048]) {
       close(fd);
       return -1;
    }
-
-   if (read(fd, rom_data, file_info.st_size) != file_info.st_size) {
+   size_t l = read(fd, rom_data, file_info.st_size);
+   if (l != file_info.st_size) {
       close(fd);
       return -1;
    }

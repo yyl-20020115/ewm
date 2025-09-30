@@ -46,6 +46,6 @@ struct ewm_one_t {
 struct ewm_one_t *ewm_one_create(int type, SDL_Renderer *renderer);
 void ewm_one_destroy(struct ewm_one_t *one);
 
-int ewm_one_main(int argc, char **argv);
+extern int ewm_one_main(int argc, char **argv);
 
 #endif // EWM_ONE_H

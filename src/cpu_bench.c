@@ -31,6 +31,9 @@
 #include "utl.h"
 
 #define CPU_BENCH_ITERATIONS (10 * 1000 * 1000)
+int clock_gettime(int n, struct timespec* s) {
+    return 0;
+}
 
 void test(struct cpu_t *cpu, uint8_t opcode) {
    uint64_t runs[3];

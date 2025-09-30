@@ -33,6 +33,9 @@
 #if defined(EWM_LUA)
 #include "lua.h"
 #endif
+int clock_gettime(int n, struct timespec* s) {
+    return 0;
+}
 
 int test(int model, uint16_t start_addr, uint16_t success_addr, char *rom_path, int with_lua) {
    struct cpu_t *cpu = cpu_create(model);
@@ -53,7 +56,6 @@ int test(int model, uint16_t start_addr, uint16_t success_addr, char *rom_path, 
 #endif
    
    uint16_t last_pc = cpu->state.pc;
-
    struct timespec start;
    if (clock_gettime(CLOCK_REALTIME, &start) != 0) {
       perror("Cannot get time");

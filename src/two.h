@@ -112,7 +112,7 @@ int ewm_two_init_lua(struct ewm_two_t *two, struct ewm_lua_t *lua);
 
 int ewm_two_load_disk(struct ewm_two_t *two, int drive, char *path);
 
-int ewm_two_main(int argc, char **argv);
+extern int ewm_two_main(int argc, char **argv);
 
 #endif // EWM_TWO_H
 

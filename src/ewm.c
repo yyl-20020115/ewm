@@ -40,7 +40,9 @@ static void usage() {
    fprintf(stderr, "allows the user to interactively select what emulator to start.\n");
    fprintf(stderr, "\nSuggestion: to get started, try 'ewm two --color --drive1 <disk file>'\n");
 }
-
+#ifdef main
+#undef main
+#endif
 int main(int argc, char **argv) {
    if (argc == 1) {
       switch (ewm_boo_main(argc, argv)) {

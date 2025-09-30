@@ -30,7 +30,11 @@
 #include <stdbool.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#ifndef _WIN32
 #include <unistd.h>
+#else
+#include <conio.h>
+#endif
 #include <sys/stat.h>
 
 #include "cpu.h"
@@ -264,7 +268,7 @@ struct mem_t *cpu_add_ram_data(struct cpu_t *cpu, uint16_t start, uint16_t end, 
 }
 
 struct mem_t *cpu_add_ram_file(struct cpu_t *cpu, uint16_t start, char *path) {
-   int fd = open(path, O_RDONLY);
+   int fd = open(path, O_RDONLY| _O_BINARY);
    if (fd == -1) {
       return NULL;
    }
@@ -312,7 +316,7 @@ struct mem_t *cpu_add_rom_data(struct cpu_t *cpu, uint16_t start, uint16_t end, 
 }
 
 struct mem_t *cpu_add_rom_file(struct cpu_t *cpu, uint16_t start, char *path) {
-   int fd = open(path, O_RDONLY);
+   int fd = open(path, O_RDONLY| _O_BINARY);
    if (fd == -1) {
       return NULL;
    }
