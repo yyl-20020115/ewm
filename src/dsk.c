@@ -522,7 +522,7 @@ int ewm_dsk_set_disk_file(struct ewm_dsk_t *dsk, uint8_t drive, bool readonly, c
       return -1;
    }
 
-   int fd = open(path, O_RDONLY);
+   int fd = open(path, O_RDONLY|O_BINARY);
    if (fd == -1) {
       return -1;
    }
